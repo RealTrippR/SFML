@@ -369,6 +369,40 @@ bool Font::hasGlyph(std::uint32_t codePoint) const
 
 
 ////////////////////////////////////////////////////////////
+int Font::getAscenderOffset(unsigned int characterSize) const
+{
+    FT_Face face = static_cast<FT_Face>(m_face);
+
+    if (face && setCurrentSize(characterSize))
+    {
+        // 26.6 fixed-point format; divide by 2^5 (64) to convert to int
+        int ascender = face->size->metrics.ascender / 64;
+
+        // it is nessecary to return the absolute value because there is no standard sign for the ascender value
+        return abs(ascender);
+    }
+
+    return 0;
+}
+
+////////////////////////////////////////////////////////////
+int Font::getDescenderOffset(unsigned int characterSize) const
+{
+    FT_Face face = static_cast<FT_Face>(m_face);
+
+    if (face && setCurrentSize(characterSize))
+    {
+        // 26.6 fixed-point format; divide by 2^5 (64) to convert to int
+        int descender = face->size->metrics.descender / 64;
+
+        // it is nessecary to return the absolute value because there is no standard sign for the descender value
+        return abs(descender);
+    }
+
+    return 0;
+}
+
+////////////////////////////////////////////////////////////
 float Font::getKerning(std::uint32_t first, std::uint32_t second, unsigned int characterSize, bool bold) const
 {
     // Special case where first or second is 0 (null character)
