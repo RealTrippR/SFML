@@ -261,6 +261,34 @@ public:
     [[nodiscard]] bool hasGlyph(std::uint32_t codePoint) const;
 
     ////////////////////////////////////////////////////////////
+    /// \brief gets the ascender height
+    /// 
+    /// The capital ascender offset refers the distance between the
+    /// baseline and the tallest gylph in the font.
+    ///
+    /// \param characterSize Reference character size
+    ///
+    /// \return ascender height
+    /// 
+    ////////////////////////////////////////////////////////////
+    [[nodiscard]] int getAscenderOffset(unsigned int characterSize) const;
+    
+    
+    ////////////////////////////////////////////////////////////
+    /// \brief gets the descender height
+    /// 
+    /// The descender offset is the vertical offset of
+    /// the part of a letter (like "g", "p", or "y")
+    /// that extends below the baseline
+    /// 
+    /// \param characterSize Reference character size
+    /// 
+    /// \return descender height
+    /// 
+    //////////////////////////////////////////////////////////// 
+    [[nodiscard]] int getDescenderOffset(unsigned int characterSize) const;
+
+    ////////////////////////////////////////////////////////////
     /// \brief Get the kerning offset of two glyphs
     ///
     /// The kerning is an extra offset (negative) to apply between two
